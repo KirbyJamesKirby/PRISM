@@ -9,7 +9,7 @@ sites:
       lat: 20.745819
       lon: -156.431767
     sensors:
-      - id: "SpaceWatch-4"
+      - id: "Silentium-SpaceWatch-4"
         name: "Passive Radar 001"
         type: RADAR
       - id: "Crimson Shock-001"
