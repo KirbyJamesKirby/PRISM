@@ -39,43 +39,18 @@ def _parse_epoch(s: str) -> datetime:
 class UDLClient:
     def __init__(self) -> None:
         self._base = settings.udl_base_url.rstrip("/")
-        self._username = settings.udl_username
-        self._password = settings.udl_password
-        self._token: str | None = None
+        self._auth = (settings.udl_username, settings.udl_password)
         self._http = httpx.AsyncClient(timeout=30.0)
 
-    async def _get_token(self) -> str:
-        """Exchange credentials for a bearer token."""
-        resp = await self._http.get(
-            f"{self._base}/udl/userinfo",
-            auth=(self._username, self._password),
-        )
-        resp.raise_for_status()
-        data = resp.json()
-        return data.get("token") or data.get("access_token", "")
-
-    async def _ensure_token(self) -> str:
-        if not self._token:
-            self._token = await self._get_token()
-        return self._token
-
     async def _get(self, path: str, params: dict[str, Any]) -> Any:
-        token = await self._ensure_token()
         resp = await self._http.get(
             f"{self._base}{path}",
             params=params,
-            headers={"Authorization": f"Bearer {token}"},
+            auth=self._auth,
         )
-        if resp.status_code == 401:
-            # Token expired — refresh and retry once
-            self._token = await self._get_token()
-            resp = await self._http.get(
-                f"{self._base}{path}",
-                params=params,
-                headers={"Authorization": f"Bearer {self._token}"},
-            )
         resp.raise_for_status()
         return resp.json()
+
 
     async def get_observations(
         self,
