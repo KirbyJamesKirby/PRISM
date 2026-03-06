@@ -3,7 +3,7 @@ import type { SiteStatus, Sensor, AnyObservation, Alert, ObType } from "./types"
 const BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
 
 async function get<T>(path: string, params?: Record<string, string | number>): Promise<T> {
-  const url = new URL(`${BASE}${path}`);
+  const url = new URL(`${BASE}${path}`, window.location.origin);
   if (params) {
     for (const [k, v] of Object.entries(params)) {
       url.searchParams.set(k, String(v));
