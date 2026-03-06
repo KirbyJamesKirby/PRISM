@@ -6,13 +6,13 @@ sites:
   - id: site-alpha
     name: "Site Alpha"
     location:
-      lat: 35.6762
-      lon: 139.6503
+      lat: 20.745819
+      lon: -156.431767
     sensors:
-      - id: "CS-RADAR-001"
+      - id: "SpaceWatch-4"
         name: "Passive Radar 001"
         type: RADAR
-      - id: "CS-EO-001"
+      - id: "Crimson Shock-001"
         name: "EO Telescope 001"
         type: OPTICAL
 
