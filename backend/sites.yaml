@@ -1,0 +1,33 @@
+# Crimson Shock site and sensor registry.
+# Add a new entry for each deployed site.
+# sensor_ids must match the sensorId values used in UDL observations.
+
+sites:
+  - id: site-alpha
+    name: "Site Alpha"
+    location:
+      lat: 35.6762
+      lon: 139.6503
+    sensors:
+      - id: "CS-RADAR-001"
+        name: "Passive Radar 001"
+        type: RADAR
+      - id: "CS-EO-001"
+        name: "EO Telescope 001"
+        type: OPTICAL
+
+  - id: site-bravo
+    name: "Site Bravo"
+    location:
+      lat: 51.5074
+      lon: -0.1278
+    sensors:
+      - id: "CS-RADAR-002"
+        name: "Passive Radar 002"
+        type: RADAR
+      - id: "CS-EO-002"
+        name: "EO Telescope 002"
+        type: OPTICAL
+      - id: "CS-RF-001"
+        name: "RF Receiver 001"
+        type: RF
